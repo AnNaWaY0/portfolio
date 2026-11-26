@@ -2,6 +2,8 @@
 <title>Mixit Case Study</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="assets/f/f001.webp" as="image" fetchpriority="high">
+<link rel="preload" href="assets/f/lo.webp" as="image">
 <link rel="preload" href="../vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>@font-face{font-family:"Inter";src:url(../vendor/fonts/inter-var.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}</style>
 <style>
@@ -305,21 +307,36 @@ const sizeStory=()=>{ story.style.height=(isPhone()?420:560)+'svh'; };
 const tailPx=()=>innerHeight*TAIL; const filmLen=()=>story.offsetHeight-innerHeight-tailPx();
 sizeStory();
 
-// ---- frames: load the first, then the rest in order; draw the nearest loaded frame
-const imgs=new Array(N); let loaded=0, cur=0;
+// ---- frames, in two tiers so the film is scrubbable almost at once:
+// 1) one small atlas (every 4th frame at 640×360, ~285 KB, one request) — the whole film can play right away;
+// 2) the full-size frames stream in behind it, the ones nearest the current position first.
+const imgs=new Array(N); let cur=0, hi=0;
 const src=i=>`assets/f/f${String(i+1).padStart(3,'0')}.webp`;
-function load(i){ return new Promise(r=>{ const im=new Image(); im.decoding='async'; im.onload=()=>{imgs[i]=im; loaded++; $('#loading').textContent=`Loading ${Math.round(loaded/N*100)}%`; if(loaded>=N*0.98) $('#loading').style.opacity=0; r();}; im.onerror=r; im.src=src(i); }); }
-(async()=>{ await load(0); draw(0); const order=[]; for(let s=8;s>=1;s>>=1) for(let i=0;i<N;i+=s) if(!order.includes(i)) order.push(i);
-  let k=0; const next=()=>{ if(k>=order.length) return; const i=order[k++]; (imgs[i]?Promise.resolve():load(i)).then(()=>{ if(Math.abs(i-cur)<4) draw(cur); next(); }); };
-  for(let p=0;p<6;p++) next(); })();
-function nearest(i){ if(imgs[i]) return imgs[i]; for(let d=1;d<N;d++){ if(imgs[i-d]) return imgs[i-d]; if(imgs[i+d]) return imgs[i+d]; } return null; }
+const LO=[]; for(let i=0;i<N;i+=4) LO.push(i); if(LO[LO.length-1]!==N-1) LO.push(N-1);
+const LOW=640, LOH=360, LOC=8; let atlas=null;
+const loEl=$('#loading'), doneLoading=()=>{ if(loEl) loEl.style.opacity=0; };
+function loadHi(i){ return new Promise(r=>{ const im=new Image(); im.decoding='async'; im.onload=()=>{ imgs[i]=im; hi++; r(); }; im.onerror=r; im.src=src(i); }); }
+// a frame to draw: the exact full-size frame, else the nearest atlas frame, else the nearest full-size one
+function frameFor(i){ if(imgs[i]) return {im:imgs[i]};
+  if(atlas){ let k=0, best=1e9; for(let j=0;j<LO.length;j++){ const d=Math.abs(LO[j]-i); if(d<best){best=d;k=j;} }
+    const near=imgs[LO[k]]; if(near) return {im:near};
+    return {im:atlas, sx:(k%LOC)*LOW, sy:Math.floor(k/LOC)*LOH, sw:LOW, sh:LOH}; }
+  for(let d=1;d<N;d++){ if(imgs[i-d]) return {im:imgs[i-d]}; if(imgs[i+d]) return {im:imgs[i+d]}; } return null; }
+loadHi(0).then(()=>draw(cur));
+{ const a=new Image(); a.decoding='async'; a.onload=()=>{ atlas=a; doneLoading(); draw(cur); }; a.onerror=doneLoading; a.src='assets/f/lo.webp'; }
+// full-size frames: 8 at a time, always picking the missing frame closest to where the viewer is (coarse steps first)
+(function stream(){ let busy=0; const want=new Set(); for(let i=0;i<N;i++) want.add(i);
+  const pick=()=>{ let best=-1, bd=1e9; for(const i of want){ const d=Math.abs(i-cur)+(i%4?N/8:0); if(d<bd){bd=d;best=i;} } return best; };
+  const next=()=>{ while(busy<8 && want.size){ const i=pick(); want.delete(i); if(imgs[i]) continue; busy++;
+      loadHi(i).then(()=>{ busy--; if(Math.abs(i-cur)<3) draw(cur); next(); }); } };
+  next(); })();
 function fit(){ const dpr=Math.min(2,devicePixelRatio||1); cv.width=innerWidth*dpr; cv.height=innerHeight*dpr; draw(cur); }
-function draw(i){ const im=nearest(i); if(!im) return; const W=cv.width, H=cv.height, iw=im.naturalWidth, ih=im.naturalHeight;
+function draw(i){ const f=frameFor(i); if(!f) return; const im=f.im; const W=cv.width, H=cv.height, iw=1440, ih=810;
   // desktop: cover, nudged so the object sits a bit right of centre; phone: fit width, object kept in the lower half
   let s, x, y;
   if(isPhone()){ s=W/iw*1.45; x=(W-iw*s)/2; y=H-ih*s-H*.06; }
   else { s=Math.min(W/iw,H/ih); x=(W-iw*s)/2; y=(H-ih*s)/2; }   // contain: every caption of the film stays on screen
-  ctx.fillStyle='#111111'; ctx.fillRect(0,0,W,H); ctx.drawImage(im,x,y,iw*s,ih*s);
+  ctx.fillStyle='#111111'; ctx.fillRect(0,0,W,H); if(f.sw) ctx.drawImage(im,f.sx,f.sy,f.sw,f.sh,x,y,iw*s,ih*s); else ctx.drawImage(im,x,y,iw*s,ih*s);
   // melt the film's edges into the page background (same #111)
   const fade=(x0,y0,x1,y1)=>{ const g=ctx.createLinearGradient(x0,y0,x1,y1); g.addColorStop(0,'#111111'); g.addColorStop(1,'rgba(17,17,17,0)'); return g; };
   const ey=Math.max(0,y)+H*.04, ex=Math.max(0,x)+W*.02;
