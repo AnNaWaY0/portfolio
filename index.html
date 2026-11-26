@@ -340,19 +340,31 @@ html.lock{overflow:hidden}
 .pc-foot .go i{font-style:normal;transition:transform .3s}.pcard:hover .pc-foot .go i{transform:translateX(6px)}
 @media (max-width:900px){.pgrid2{grid-template-columns:1fr!important;row-gap:56px}.pcard{grid-column:1/-1!important}.pc-head{min-height:0}.pcard .tile{height:72vw}}
 
-/* ===== direction pages, round 18: no tile backgrounds — each photo at its own proportions, melted into the paper,
-   wide and narrow cards alternate and the narrow one sits lower, so the grid reads as a loose, organic layout ===== */
-.pgrid2{align-items:start;row-gap:clamp(64px,7vw,112px)}
-.pcard.s5{margin-top:clamp(56px,8vw,140px)}
-.pcard .tile{height:auto!important;aspect-ratio:auto;background:none!important;box-shadow:none}
-.pcard .tile.fit{align-self:flex-start;max-width:100%}
-.pcard .tile.fit img{position:static;display:block;width:auto;max-width:100%;height:auto;max-height:min(76vh,700px);object-fit:contain;padding:0!important;mix-blend-mode:multiply}
-.pcard .tile.shot{aspect-ratio:16/10;align-self:stretch}
-.pcard .tile.empty{align-self:stretch;aspect-ratio:4/3;border:1px dashed #CFCCC5;border-radius:var(--r)}
-.pcard .tile.empty .ph3{background:none}
-.pcard .pc-foot{margin-top:14px}
-.pcard.lone-l{grid-column:1/span 6}.pcard.lone-r{grid-column:7/span 6}
-@media (max-width:900px){.pcard.s5{margin-top:0}.pcard .tile.fit img{max-height:none}}
+/* ===== direction pages, round 19: one calm grid of equal cards — the object sits in a light frame (no grey fill),
+   title + one line + semester and year below; hovering fills the frame with the direction colour ===== */
+.pgrid2{grid-template-columns:repeat(3,minmax(0,1fr))!important;column-gap:clamp(20px,2.4vw,36px);row-gap:clamp(48px,5vw,72px);align-items:start;padding-block:48px clamp(96px,10vw,140px)}
+.pcard{grid-column:auto!important;margin:0!important;display:flex;flex-direction:column;gap:18px;text-decoration:none;color:inherit}
+.media{position:relative;aspect-ratio:4/5;display:grid;place-items:center;overflow:hidden;border-radius:var(--r);box-shadow:inset 0 0 0 1px var(--line);isolation:isolate;transition:box-shadow .4s}
+.media .fill{position:absolute;inset:0;z-index:-1;background:var(--c);transform:scaleY(0);transform-origin:50% 100%;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+.pcard:hover .media .fill,.pcard:focus-visible .media .fill{transform:scaleY(1)}
+.pcard:hover .media,.pcard:focus-visible .media{box-shadow:inset 0 0 0 1px var(--c)}
+.media img{display:block;max-width:none;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.media.photo img{width:76%;height:76%;object-fit:cover;border-radius:2px;box-shadow:0 18px 30px -18px rgba(0,0,0,.35)}
+.media.shot img{width:76%;height:76%;object-fit:cover;object-position:50% 0;border-radius:2px;box-shadow:0 18px 30px -18px rgba(0,0,0,.35)}
+.media.cut img{width:72%;height:72%;object-fit:contain;filter:drop-shadow(0 18px 18px rgba(0,0,0,.18))}
+.pcard:hover .media img{transform:scale(1.04)}
+.pcard:hover .media.shot img{object-position:50% 100%;transition:transform .7s cubic-bezier(.2,.8,.2,1),object-position 4s ease-in-out}
+.media.empty{box-shadow:inset 0 0 0 1px var(--line);background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(0,0,0,.025) 14px 15px)}
+.pc-body{display:flex;flex-direction:column;gap:6px}
+.pc-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.pcard .pc-top h3{margin:0;font:800 clamp(22px,1.9vw,28px)/1.1 var(--disp);font-variation-settings:"opsz" 32;letter-spacing:-.03em}
+.pcard .pc-body p{margin:0;color:var(--soft);font-size:16px;line-height:1.45;max-width:38ch}
+.pc-meta{display:flex;gap:12px;margin-top:8px;padding-top:10px;border-top:1px solid var(--line)}
+.pcard .go{flex:none;display:inline-flex;gap:8px;opacity:.55;transition:opacity .3s}
+.pcard .go i{font-style:normal;transition:transform .3s}
+.pcard:hover .go{opacity:1}.pcard:hover .go i{transform:translateX(5px)}
+@media (max-width:1100px){.pgrid2{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:600px){.pgrid2{grid-template-columns:1fr!important}.media{aspect-ratio:1/1}}
 </style>
 </head>
 <body>
@@ -532,27 +544,27 @@ function build(){
 const fig=(src,alt,a,b)=>`<figure><img src="assets/${src}" alt="${alt}" loading="lazy">${a?`<div class="cap lab"><span>${a}</span><span class="mute">${b||''}</span></div>`:''}</figure>`;
 const PROJ={
  web:[
-  {t:'Cinemania',meta:'UX/UI · 2026',short:'Streaming site, designed end to end.',cover:'home-long.webp',kind:'shot',long:1,
+  {t:'Cinemania',type:'UX/UI',year:'2024',short:'Streaming site, designed end to end.',cover:'home-long.webp',kind:'shot',
    desc:'A streaming site designed end to end: 101 connected screens, 223 components, a full join flow and a watch page with discussion.',
    link:['Open the case','cinemania/index.html'],href:'cinemania/index.html',
    body:fig('home-long.webp','Cinemania home page, full length','Home page','full length')+fig('watch.webp','Watch page','Watch page','player, episodes, comments')+fig('tariffs.webp','Plans page','Join flow — plans','step 1 of 3')},
-  {t:'Fluid Overlap',meta:'UI kit · 2025',href:'fluid/index.html',short:'The component board behind Cinemania.',cover:'fluid-cover.webp',kind:'photo',
-   desc:'A UI system rooted in soft geometric abstraction and organic layering — the component board behind Cinemania.',
+  {t:'Fluid Overlap',type:'UI kit',year:'2025',href:'fluid/index.html',short:'A standalone UI kit of soft, overlapping shapes.',cover:'fluid-cover.webp',kind:'photo',
+   desc:'A UI system rooted in soft geometric abstraction and organic layering.',
    body:fig('search.webp','Search and filters built from the UI system','Components in use','search & filters')},
-  {t:'Energie THM website',meta:'In progress · 2026',short:'[ add a one-line description ]',cover:null,
+  {t:'Energie THM website',type:'Website',year:'2026',wip:1,short:'[ add a one-line description ]',cover:null,
    desc:'[ Project in progress — add description and images ]',body:''}],
  product:[
-  {t:'Mixit',meta:'Object · SoSe 2026',short:'A handheld console with its own colour-mixing game.',cover:'mixit-hands.webp',kind:'photo',href:'mixit/index.html',
+  {t:'Mixit',type:'Object',sem:'Semester 4',year:'2026',short:'A handheld console with its own colour-mixing game.',cover:'mixit-hands.webp',kind:'photo',href:'mixit/index.html',
    desc:'A handheld console and the arcade game that runs on it.',body:''},
-  {t:'AERIS',meta:'Object · nesting module · 2026',short:'A passively cooled nest for urban facades.',cover:'aeris-orange.webp',kind:'photo',href:'aeris/index.html',desc:'',body:''},
-  {t:'Object for a prosthesis',meta:'In progress · semester 5',short:'[ add a one-line description ]',cover:null,
-   desc:'[ Project in progress — add description and images ]',body:''},
-  {t:'Surprise soap',meta:'Object · semester 2',short:'Two layers and a small stone hidden inside.',cover:'soap.webp',kind:'photo',href:'soap/index.html',
+  {t:'AERIS',type:'Nesting module',year:'2026',short:'A passively cooled nest for urban facades.',cover:'aeris-orange.webp',kind:'photo',href:'aeris/index.html',desc:'',body:''},
+  {t:'Aura',type:'Tableware',sem:'Semester 3',year:'2026',short:'Porcelain tableware with traditional hand painting.',cover:'plate-cut.webp',kind:'cut',href:'aura/index.html',
+   desc:'A reinterpretation of porcelain tableware that combines practicality, simplicity and traditional hand painting, inspired by Eastern European ornament.',
+   body:fig('plate.webp','Hand-painted Aura plate','Plate','hand painting')},
+  {t:'Surprise soap',type:'Object',sem:'Semester 2',year:'2025',short:'Two layers and a small stone hidden inside.',cover:'soap-cut.webp',kind:'cut',href:'soap/index.html',
    desc:'The soap has two layers: a transparent outer one and a colourful inner one. Inside hides a small stone that appears as the soap is used.',
    body:fig('soap.webp','Surprise soap with foam in hands','Final result','photo')},
-  {t:'Aura',meta:'Object · semester 3',short:'Porcelain tableware with traditional hand painting.',cover:'plate-hd.webp',kind:'photo',href:'aura/index.html',
-   desc:'A reinterpretation of porcelain tableware that combines practicality, simplicity and traditional hand painting, inspired by Eastern European ornament.',
-   body:fig('plate.webp','Hand-painted Aura plate','Plate','hand painting')}],
+  {t:'Object for a prosthesis',type:'Object',sem:'Semester 5',year:'2026',wip:1,short:'[ add a one-line description ]',cover:null,
+   desc:'[ Project in progress — add description and images ]',body:''}],
  d3:[
   {t:'Outdoor pavilion',meta:'Visualisation · AI scene',short:'From a simple 3D scene to a photoreal park view.',cover:'pavilion.webp',kind:'photo',
    desc:'A simple 3D scene turned into a photoreal view of how the pavilion would look in a real park. Drag to compare the raw render with the final image.',
@@ -561,16 +573,16 @@ const PROJ={
    desc:'A wall-mounted nesting box: exterior shell, wooden core and mounting, shown from the facade to the exploded view.',
    body:`<div class="pgrid"><img loading="lazy" decoding="async" src="assets/bird-wall.webp" alt="Birdhouse on a sunlit wall"><img loading="lazy" decoding="async" src="assets/bird-exploded.webp" alt="Exploded view of the birdhouse"><img loading="lazy" decoding="async" src="assets/bird-section.webp" alt="Section of the birdhouse"><img loading="lazy" decoding="async" src="assets/bird-render.webp" alt="Studio render of the birdhouse"></div>`},
   {t:'Product concepts for advertising',meta:'Concept · render',short:'[ add a one-line description ]',cover:null,desc:'[ Add description and images ]',body:''}]};
+['web','product'].forEach(k=>PROJ[k].forEach(p=>{ p.meta=[p.wip?'In progress':p.type,p.sem,p.year].filter(Boolean).join(' · '); }));
 const DIRS=[['web','Web design'],['product','Product design'],['d3','3D design']];
 const pad=n=>String(n+1).padStart(2,'0');
 Object.entries(PROJ).forEach(([k,list])=>{
  const cnt=$(`.cnt[data-cnt="${k}"]`); if(cnt) cnt.textContent=`${list.length} projects`;
- // checkerboard 7/5 · 5/7 (as on the references): title + one line above, the whole object in the tile, meta + action below
- const span=(i,n)=>{ const r=Math.floor(i/2), first=i%2===0; if(first&&i===n-1) return r%2?'lone-r':'lone-l'; return (r%2===0)===first?'s7':'s5'; };
- $(`.pgrid2[data-for="${k}"]`).innerHTML=list.map((p,i)=>`<a class="pcard ${span(i,list.length)}" id="p-${k}-${i}" ${p.href?`href="${p.href}" data-case`:`href="#${k}" data-open="${k}:${i}"`}>
-  <div class="pc-head"><h3>${p.t}</h3><p>${p.short}</p></div>
-  <div class="tile ${p.long?'shot':'fit'}${p.cover?'':' empty'}">${p.cover?(p.long?`<span class="bar"><i></i><i></i><i></i></span>`:'')+`<img src="assets/${p.cover}" alt="${p.t}" loading="lazy">`:`<div class="ph3 lab mute">[ images coming ]</div>`}</div>
-  <div class="pc-foot lab"><span>${pad(i)} — <span class="mute">${p.meta}</span></span><span class="go">${p.href?'Open case':'Open'} <i>→</i></span></div></a>`).join('');
+ // uniform cards: the object in a frame, then title, one line, semester and year; on hover the frame fills with the direction colour
+ $(`.pgrid2[data-for="${k}"]`).innerHTML=list.map((p,i)=>`<a class="pcard" id="p-${k}-${i}" ${p.href?`href="${p.href}" data-case`:`href="#${k}" data-open="${k}:${i}"`}>
+  <div class="media ${p.cover?p.kind:'empty'}"><span class="fill" aria-hidden="true"></span>${p.cover?`<img src="assets/${p.cover}" alt="${p.t}" loading="lazy" decoding="async">`:`<span class="lab mute">Images coming</span>`}</div>
+  <div class="pc-body"><div class="pc-top"><h3>${p.t}</h3><span class="go lab" aria-hidden="true">${p.href?'Case':'Open'} <i>→</i></span></div>
+  <p>${p.short}</p><span class="pc-meta lab"><span>${pad(i)}</span><span class="mute">${p.meta}</span></span></div></a>`).join('');
 });
 
 // ---- 3D: a gallery of every artwork — minimal names, one grid, a lightbox
