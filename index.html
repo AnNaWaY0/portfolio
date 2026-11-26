@@ -143,6 +143,7 @@ section,.sec{position:relative;z-index:1}
 .dc-product .t h3{margin-bottom:8px}
 /* 3D */
 .dc-3d .band{left:0;right:0;bottom:0;height:12.5%;background:var(--d3);clip-path:inset(0 100% 0 0)}
+.dc-3d .band.fill{transition-duration:.7s;transition-timing-function:cubic-bezier(.3,0,.2,1)}
 .dc-3d.lit .band{clip-path:inset(0 0 0 0)}
 .dc-3d .t{left:clamp(24px,3.5vw,48px);width:42%;top:16%;display:flex;flex-direction:column;gap:16px}
 .dc-3d .t h3{margin-bottom:8px}
@@ -498,14 +499,14 @@ function build(){
  const defs=[
   ['yellow','#dWeb',W,[...head,[XL,web.y-g2],[web.x+web.w*.15,web.y-g2],[web.x+web.w*.15,web.y+24]],[...hr,40,40],'top 58%'],
   ['red','#dProduct',0,[...head,[XL,pr.y-g2],[pr.x+44,pr.y-g2],[pr.x+44,pr.y+24]],[...hr,36,36],'top 58%'],
-  ['blue','#d3d',-W,[...head,[XL,d3.y+d3.h*.9375],[d3.x+24,d3.y+d3.h*.9375]],[...hr,60],'bottom 80%']];
+  ['blue','#d3d',-W,[...head,[XL,d3.y+d3.h*.9375],[d3.x+24,d3.y+d3.h*.9375]],[...hr,60],String(Math.max(0,Math.round(d3.y+d3.h-innerHeight*.98)))]];
  svg.innerHTML=defs.map(([c,sel,d,pts,rad,end])=>`<path data-c="${c}" data-card="${sel}" data-end="${end}" data-first="${XR+80}" stroke="var(--${c})" d="${route(pts,d,rad)}"/>`).join('');
  $$('#lines path').forEach(p=>{
    const L=p.getTotalLength(); p.style.strokeDasharray=L; const card=$(p.dataset.card);
    if(reduce||!window.ScrollTrigger){ p.style.strokeDashoffset=0; card.classList.add('lit'); return; }
    const intro=Math.min(.5,(+p.dataset.first*.85)/L);
    const tw=gsap.fromTo(p,{strokeDashoffset:L*(1-intro)},{strokeDashoffset:0,ease:'none',immediateRender:true,
-     scrollTrigger:{trigger:'main',start:'top top',endTrigger:card,end:p.dataset.end,scrub:.6,
+     scrollTrigger:{trigger:'main',start:'top top',endTrigger:card,end:/^\d+$/.test(p.dataset.end)?+p.dataset.end:p.dataset.end,scrub:.6,
        onLeave:()=>card.classList.add('lit'),onEnterBack:()=>card.classList.remove('lit')}});
    lineTriggers.push(tw.scrollTrigger,tw);
  });
