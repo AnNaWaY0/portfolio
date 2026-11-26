@@ -113,6 +113,8 @@ section,.sec{position:relative;z-index:1}
 .dcard li{font:600 12px/1.9 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .dcard .t{position:absolute;z-index:3}
 .dcard .t .link{align-self:flex-start;margin-top:8px}
+/* the whole card is the link (the cursor says Open), so on desktop the text link is dropped — it sat on the colour bands */
+@media (min-width:901px){.dcard .t .link{display:none}}
 .dcard .polaroid{position:absolute;padding:10px 10px 44px;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
 .dcard .polaroid img,.dcard .polaroid .ph{width:100%;aspect-ratio:5/4;object-fit:cover}
 .ph.fillph{background:#E3E1DC}
