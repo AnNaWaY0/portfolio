@@ -210,7 +210,9 @@ main{overflow-x:clip}
 .crumbs.full .fin i{transform:scale(1)}
 /* carousel */
 .car{width:930px;height:313px;position:relative}
-.car .slide{position:absolute;top:0;width:280px;height:300px;transition:transform .6s var(--ease),left .6s var(--ease),z-index 0s .2s;cursor:pointer}
+.car{touch-action:pan-y;user-select:none;cursor:grab}.car.drag{cursor:grabbing}
+.car .slide{translate:var(--dx,0px) 0}.car.drag .slide{transition:transform .6s var(--ease),z-index 0s .2s}
+.car .slide{position:absolute;top:0;width:280px;height:300px;transition:transform .6s var(--ease),left .6s var(--ease),translate .45s var(--ease),z-index 0s .2s;cursor:pointer}
 .car .slide .ph{height:52%;border-radius:20px 20px 0 0;background:var(--ph)}
 .car .slide .pn{position:absolute;left:0;right:0;bottom:0;height:56%;background:#000;color:#fff;border:2px solid #fff;border-radius:20px;padding:22px 24px}
 .car .slide b{display:block;font:500 15px var(--ui);letter-spacing:.06em}
@@ -471,8 +473,21 @@ $$('[data-crumbs]').forEach(cr=>{ const bs=[...cr.querySelectorAll('button')];
 // carousel: click a card to bring it forward
 $$('[data-car]').forEach(c=>{ const sl=[...c.querySelectorAll('.slide')]; const lefts=[0,325,650];
   const go=k=>{ const n=sl.length; sl.forEach((s,i)=>{ const pos=((i-k+1)%n+n)%n; s.style.left=lefts[pos]+'px'; s.classList.toggle('on',i===k); }); };
-  sl.forEach((s,i)=>{ s.addEventListener('click',e=>{ if(!e.target.closest('.try')) go(i); }); s.addEventListener('keydown',e=>{ if(e.key==='Enter') go(i); }); });
-  c.querySelectorAll('.try').forEach(t=>t.addEventListener('click',e=>{ e.stopPropagation(); const s=t.closest('.slide'); go(sl.indexOf(s)); t.textContent='Thank you'; setTimeout(()=>t.textContent='Try now',1200); }));
+  let k=sl.findIndex(s=>s.classList.contains('on')); if(k<0) k=0;
+  const go2=i=>{ k=(i+sl.length)%sl.length; go(k); };
+  // drag (mouse or finger): the cards follow, a flick past 40px moves one card; a plain click still picks a card
+  let x0=null, dx=0, moved=false;
+  c.addEventListener('pointerdown',e=>{ if(e.button>0||e.target.closest('.try')) return; x0=e.clientX; dx=0; moved=false; });
+  addEventListener('pointermove',e=>{ if(x0===null) return; const sc=c.getBoundingClientRect().width/c.offsetWidth||1; dx=(e.clientX-x0)/sc;
+    if(!moved&&Math.abs(dx)>6){ moved=true; c.classList.add('drag'); }
+    if(moved) c.style.setProperty('--dx',Math.max(-200,Math.min(200,dx))+'px'); });
+  const end=()=>{ if(x0===null) return; x0=null; c.classList.remove('drag'); c.style.setProperty('--dx','0px');
+    if(moved){ if(dx<-40) go2(k+1); else if(dx>40) go2(k-1); } };
+  addEventListener('pointerup',end); addEventListener('pointercancel',end);
+  c.addEventListener('click',e=>{ if(moved){ e.stopPropagation(); e.preventDefault(); moved=false; } },true);
+  c.addEventListener('dragstart',e=>e.preventDefault());
+  sl.forEach((s,i)=>{ s.addEventListener('click',e=>{ if(!e.target.closest('.try')) go2(i); }); s.addEventListener('keydown',e=>{ if(e.key==='Enter') go2(i); if(e.key==='ArrowRight') go2(k+1); if(e.key==='ArrowLeft') go2(k-1); }); });
+  c.querySelectorAll('.try').forEach(t=>t.addEventListener('click',e=>{ e.stopPropagation(); const s=t.closest('.slide'); go2(sl.indexOf(s)); t.textContent='Thank you'; setTimeout(()=>t.textContent='Try now',1200); }));
 });
 
 // quiet cursor: dot + short thin ribbon
