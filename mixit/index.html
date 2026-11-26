@@ -1,9 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
 <title>Mixit Case Study</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="../vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:"Inter";src:url(../vendor/fonts/inter-var.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}</style>
 <style>
 /* Anna Stashko — case page in the portfolio system: paper, Inter only, 12-col grid, corners 0–4px.
    Product design = red (nav, next project, footer). The case's own accent is the orange of the game card. */
@@ -265,9 +265,9 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
   <span class="lab mute">In use</span>
   <h2 class="h" style="margin-top:16px">Played at the table.</h2>
   <div class="photos g12">
-    <figure><div class="ph"><img src="assets/hands.jpg" alt="Mixit console held in two hands, the game on screen" loading="lazy"></div><figcaption class="lab"><span>In the hand</span><span class="mute">01</span></figcaption></figure>
-    <figure><div class="ph"><img src="assets/table.jpg" alt="Visitors playing on Mixit consoles at a long table" loading="lazy"></div><figcaption class="lab"><span>Players at the table</span><span class="mute">02</span></figcaption></figure>
-    <figure><div class="ph"><img src="assets/card.jpg" alt="Mixit start screen next to the orange Color Mix project card" loading="lazy"></div><figcaption class="lab"><span>Console + project card</span><span class="mute">03</span></figcaption></figure>
+    <figure><div class="ph"><img src="assets/hands.webp" alt="Mixit console held in two hands, the game on screen" loading="lazy"></div><figcaption class="lab"><span>In the hand</span><span class="mute">01</span></figcaption></figure>
+    <figure><div class="ph"><img src="assets/table.webp" alt="Visitors playing on Mixit consoles at a long table" loading="lazy"></div><figcaption class="lab"><span>Players at the table</span><span class="mute">02</span></figcaption></figure>
+    <figure><div class="ph"><img src="assets/card.webp" alt="Mixit start screen next to the orange Color Mix project card" loading="lazy"></div><figcaption class="lab"><span>Console + project card</span><span class="mute">03</span></figcaption></figure>
   </div>
 </section>
 
@@ -290,9 +290,9 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
 </section>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/ScrollTrigger.min.js"></script>
+<script src="../vendor/scroll.js"></script>
 <script>
 (function(){
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -434,12 +434,13 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce){
   const size=()=>{tc.width=innerWidth*dpr; tc.height=innerHeight*dpr; tc.style.width=innerWidth+'px'; tc.style.height=innerHeight+'px'; c2.setTransform(dpr,0,0,dpr,0,0);}; size(); addEventListener('resize',size);
   addEventListener('pointermove',e=>{mx=e.clientX; my=e.clientY; dot.style.opacity=1;}); addEventListener('pointerleave',()=>dot.style.opacity=0);
   const cols=['#FFB500','#D6001C','#198CD9'];
-  (function loop(){ dx+=(mx-dx)*.25; dy+=(my-dy)*.25; dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
+  let raf=0; const kick=()=>{ if(!raf) raf=requestAnimationFrame(loop); }; addEventListener('pointermove',kick,{passive:true});
+  const loop=()=>{ raf=0; dx+=(mx-dx)*.25; dy+=(my-dy)*.25; dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
     pts.push([mx,my]); if(pts.length>10) pts.shift(); c2.clearRect(0,0,innerWidth,innerHeight);
     if(pts.length>2){ cols.forEach((col,k)=>{ const o=(k-1)*3; c2.beginPath();
       for(let i=1;i<pts.length;i++){ const [x0,y0]=pts[i-1],[x1,y1]=pts[i]; let nx=y0-y1, ny=x1-x0; const l=Math.hypot(nx,ny)||1; nx/=l; ny/=l; if(i===1) c2.moveTo(x0+nx*o,y0+ny*o); c2.lineTo(x1+nx*o,y1+ny*o); }
       c2.strokeStyle=col; c2.lineWidth=2; c2.lineCap='round'; c2.lineJoin='round'; c2.globalAlpha=.7; c2.stroke(); }); c2.globalAlpha=1; }
-    requestAnimationFrame(loop); })();
+    if(Math.abs(mx-dx)>.2||Math.abs(my-dy)>.2||pts.some(q=>q[0]!==mx||q[1]!==my)) kick(); }; kick();
 }
 })();
 </script>

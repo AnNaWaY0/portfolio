@@ -1,9 +1,15 @@
+<!doctype html>
+<html lang="en" data-page="home">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Anna Stashko Portfolio</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap">
+<meta name="description" content="Anna Stashko — graphic, web and product designer, HfG Offenbach. Web, product and 3D design portfolio.">
+<meta name="theme-color" content="#FAFAF7">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Inter";src:url(vendor/fonts/inter-var.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 /* Near-white paper, Inter Display (opsz 32) heavy and tight, Inter labels (one typeface).
    Three lines — yellow, red, blue — travel with the scroll and each ends in its own direction:
    yellow → web, red → product, blue → 3D. 12-col grid, 80px margins, corners 0–4px. */
@@ -80,11 +86,12 @@ section,.sec{position:relative;z-index:1}
 
 /* tools — endless row, 3D icons */
 .toolrow{overflow:hidden;padding-block:40px 24px;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.ttrack{display:flex;gap:clamp(56px,7vw,110px);width:max-content;animation:mq 40s linear infinite;padding-inline:20px}
+.ttrack{display:flex;gap:clamp(56px,7vw,110px);width:max-content;animation:mq 40s linear infinite;padding-inline:20px;will-change:transform}
+.toolrow.off .ttrack{animation-play-state:paused}
 .tool{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
 .icon3d{width:104px;height:104px;position:relative;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
 .icon3d img,.icon3d .ph2{width:100%;height:100%;position:relative;z-index:2;border-radius:22px;
-  filter:drop-shadow(1px 1px 0 rgba(0,0,0,.16)) drop-shadow(2px 2px 0 rgba(0,0,0,.14)) drop-shadow(3px 3px 0 rgba(0,0,0,.12)) drop-shadow(4px 4px 0 rgba(0,0,0,.1)) drop-shadow(6px 6px 0 rgba(0,0,0,.08)) drop-shadow(0 26px 22px rgba(0,0,0,.18))}
+  box-shadow:1px 1px 0 rgba(0,0,0,.16),2px 2px 0 rgba(0,0,0,.14),3px 3px 0 rgba(0,0,0,.12),4px 4px 0 rgba(0,0,0,.1),6px 6px 0 rgba(0,0,0,.08),0 26px 22px rgba(0,0,0,.18)}
 .icon3d .ph2{display:grid;place-items:center;background:#ECEAE5;font:800 32px var(--disp);color:var(--mute)}
 .icon3d::after{content:"";position:absolute;inset:0;border-radius:22px;z-index:3;background:linear-gradient(135deg,rgba(255,255,255,.45),rgba(255,255,255,0) 45%);pointer-events:none;mix-blend-mode:soft-light}
 .tool:hover .icon3d{transform:translateY(-8px)}
@@ -330,7 +337,8 @@ html.lock{overflow:hidden}
 .pc-foot .go i{font-style:normal;transition:transform .3s}.pcard:hover .pc-foot .go i{transform:translateX(6px)}
 @media (max-width:900px){.pgrid2{grid-template-columns:1fr!important;row-gap:56px}.pcard{grid-column:1/-1!important}.pc-head{min-height:0}.pcard .tile{height:72vw}}
 </style>
-
+</head>
+<body>
 <header class="nav">
   <a class="logo" href="#home" data-go="home"><img src="assets/logo.svg" alt="">Anna Stashko</a>
   <nav class="menu lab" aria-label="Sections">
@@ -381,18 +389,18 @@ html.lock{overflow:hidden}
       <a class="dcard dc-web" id="dWeb" href="#web" data-go="web" data-cat="web">
         <span class="band fill"></span><span class="circle"></span>
         <div class="t"><h3 class="disp">Web<br>design</h3><div class="lower"><p>Interfaces and websites built on systems: research, wireframes, components and clickable prototypes.</p><ul><li>— Cinemania, streaming site</li><li>— Website elements board</li><li>— Energie THM website (in progress)</li></ul><span class="link">View all projects <span>→</span></span></div></div>
-        <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img src="assets/home-long.jpg" alt="Cinemania home page, latest version"></div>
+        <div class="browser"><div class="bar"><i></i><i></i><i></i></div><img loading="lazy" decoding="async" src="assets/home-long.webp" alt="Cinemania home page, latest version"></div>
         <span class="cap2 lab">Cinemania — case 01</span>
       </a>
       <a class="dcard dc-product" id="dProduct" href="#product" data-go="product" data-cat="product">
         <span class="band fill"><span class="lab">Product</span></span><span class="dot"></span>
-        <div class="collage"><div class="polaroid p1"><img src="assets/mixit-hands.jpg" alt="Mixit handheld console in use"></div><div class="polaroid p2"><img src="assets/plate.jpg" alt="Hand-painted Aura plate"></div><div class="polaroid p3"><img src="assets/soap.jpg" alt="Surprise soap in hands"></div></div>
+        <div class="collage"><div class="polaroid p1"><img loading="lazy" decoding="async" src="assets/mixit-hands.webp" alt="Mixit handheld console in use"></div><div class="polaroid p2"><img loading="lazy" decoding="async" src="assets/plate.webp" alt="Hand-painted Aura plate"></div><div class="polaroid p3"><img loading="lazy" decoding="async" src="assets/soap.webp" alt="Surprise soap in hands"></div></div>
         <div class="t"><h3 class="disp">Product<br>design</h3><p>Objects — from the first physical model to the photo of the finished piece.</p><ul><li>— Mixit, handheld game console</li><li>— AERIS, nesting module for facades</li><li>— Surprise soap</li><li>— Aura, porcelain tableware</li></ul><span class="link">View all projects <span>→</span></span></div>
       </a>
       <a class="dcard dc-3d" id="d3d" href="#d3" data-go="d3" data-cat="d3">
         <span class="band fill"></span>
         <div class="t"><h3 class="disp">3D<br>design</h3><p>Models and photoreal visualisation, including AI-assisted scenes that place a 3D model in a real environment.</p><ul><li>— Gallery of 14 works</li><li>— Pavilion, interiors, objects</li><li>— Renders for AERIS and Mixit</li></ul><span class="link">View all projects <span>→</span></span></div>
-        <div class="collage"><div class="polaroid p4"><div class="ph fillph"></div></div><div class="polaroid p1"><img src="assets/bird-wall.jpg" alt="Birdhouse on a sunlit wall"></div><div class="polaroid p3"><img src="assets/bird-render.jpg" alt="Studio render of the birdhouse"></div><div class="polaroid p2"><img src="assets/pavilion.jpg" alt="Wooden pavilion in a park"></div></div>
+        <div class="collage"><div class="polaroid p4"><div class="ph fillph"></div></div><div class="polaroid p1"><img loading="lazy" decoding="async" src="assets/bird-wall.webp" alt="Birdhouse on a sunlit wall"></div><div class="polaroid p3"><img loading="lazy" decoding="async" src="assets/bird-render.webp" alt="Studio render of the birdhouse"></div><div class="polaroid p2"><img loading="lazy" decoding="async" src="assets/pavilion.webp" alt="Wooden pavilion in a park"></div></div>
       </a>
     </div>
   </section>
@@ -448,9 +456,9 @@ html.lock{overflow:hidden}
 <div class="mband" aria-hidden="true"></div>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/scroll.js"></script>
 <script>
 (function(){
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -460,8 +468,10 @@ const html=document.documentElement;
 
 // ---- tools (years from Anna)
 const TOOLS=[['Figma','figma',3],['Photoshop','photoshop',5],['Illustrator','illustrator',5],['InDesign','indesign',4],['3ds Max','3dsmax',2],['Rhino','rhino',2],['Blender','blender',3]];
-const item=([n,f,y],i,hid)=>`<div class="tool"${hid?' aria-hidden="true"':''}><div class="icon3d">${f?`<img src="assets/ic-${f}.png" alt="${hid?'':n+' icon'}">`:`<div class="ph2" title="Add the official Blender icon">Bl</div>`}</div><h4>${n}</h4><div class="yrs"><b>${y}</b><span class="lab mute">years</span></div></div>`;
+const item=([n,f,y],i,hid)=>`<div class="tool"${hid?' aria-hidden="true"':''}><div class="icon3d">${f?`<img loading="lazy" decoding="async" src="assets/ic-${f}.webp" alt="${hid?'':n+' icon'}">`:`<div class="ph2" title="Add the official Blender icon">Bl</div>`}</div><h4>${n}</h4><div class="yrs"><b>${y}</b><span class="lab mute">years</span></div></div>`;
 $('#ttrack').innerHTML=TOOLS.map((t,i)=>item(t,i,false)).join('')+TOOLS.map((t,i)=>item(t,i,true)).join('');
+// the endless row only runs while it is on screen
+if('IntersectionObserver' in window){ const tr=$('.toolrow'); new IntersectionObserver(([e])=>tr.classList.toggle('off',!e.isIntersecting)).observe(tr); }
 
 // before/after on the 3D page
 
@@ -505,34 +515,34 @@ function build(){
 const fig=(src,alt,a,b)=>`<figure><img src="assets/${src}" alt="${alt}" loading="lazy">${a?`<div class="cap lab"><span>${a}</span><span class="mute">${b||''}</span></div>`:''}</figure>`;
 const PROJ={
  web:[
-  {t:'Cinemania',meta:'UX/UI · 2026',short:'Ukrainian streaming site, designed end to end.',cover:'home-long.jpg',kind:'shot',long:1,
+  {t:'Cinemania',meta:'UX/UI · 2026',short:'Ukrainian streaming site, designed end to end.',cover:'home-long.webp',kind:'shot',long:1,
    desc:'A Ukrainian streaming site designed end to end: 101 connected screens, 223 components, a full join flow and a watch page with discussion.',
    link:['Open the case','cinemania/index.html'],href:'cinemania/index.html',
-   body:fig('home-long.jpg','Cinemania home page, full length','Home page','full length')+fig('watch.jpg','Watch page','Watch page','player, episodes, comments')+fig('tariffs.jpg','Plans page','Join flow — plans','step 1 of 3')},
-  {t:'Fluid Overlap',meta:'UI kit · 2025',href:'fluid/index.html',short:'The component board behind Cinemania.',cover:'fluid-cover.jpg',kind:'photo',
+   body:fig('home-long.webp','Cinemania home page, full length','Home page','full length')+fig('watch.webp','Watch page','Watch page','player, episodes, comments')+fig('tariffs.webp','Plans page','Join flow — plans','step 1 of 3')},
+  {t:'Fluid Overlap',meta:'UI kit · 2025',href:'fluid/index.html',short:'The component board behind Cinemania.',cover:'fluid-cover.webp',kind:'photo',
    desc:'A UI system rooted in soft geometric abstraction and organic layering — the component board behind Cinemania.',
-   body:fig('search.jpg','Search and filters built from the UI system','Components in use','search & filters')},
+   body:fig('search.webp','Search and filters built from the UI system','Components in use','search & filters')},
   {t:'Energie THM website',meta:'In progress · 2026',short:'[ add a one-line description ]',cover:null,
    desc:'[ Project in progress — add description and images ]',body:''}],
  product:[
-  {t:'Mixit',meta:'Object · SoSe 2026',short:'A handheld console with its own colour-mixing game.',cover:'mixit-hands.jpg',kind:'photo',href:'mixit/index.html',
+  {t:'Mixit',meta:'Object · SoSe 2026',short:'A handheld console with its own colour-mixing game.',cover:'mixit-hands.webp',kind:'photo',href:'mixit/index.html',
    desc:'A handheld console and the arcade game that runs on it.',body:''},
-  {t:'AERIS',meta:'Object · nesting module · 2026',short:'A passively cooled nest for urban facades.',cover:'aeris-orange.jpg',kind:'photo',href:'aeris/index.html',desc:'',body:''},
+  {t:'AERIS',meta:'Object · nesting module · 2026',short:'A passively cooled nest for urban facades.',cover:'aeris-orange.webp',kind:'photo',href:'aeris/index.html',desc:'',body:''},
   {t:'Object for a prosthesis',meta:'In progress · semester 5',short:'[ add a one-line description ]',cover:null,
    desc:'[ Project in progress — add description and images ]',body:''},
-  {t:'Surprise soap',meta:'Object · semester 2',short:'Two layers and a small stone hidden inside.',cover:'soap.jpg',kind:'photo',href:'soap/index.html',
+  {t:'Surprise soap',meta:'Object · semester 2',short:'Two layers and a small stone hidden inside.',cover:'soap.webp',kind:'photo',href:'soap/index.html',
    desc:'The soap has two layers: a transparent outer one and a colourful inner one. Inside hides a small stone that appears as the soap is used.',
-   body:fig('soap.jpg','Surprise soap with foam in hands','Final result','photo')},
-  {t:'Aura',meta:'Object · semester 3',short:'Porcelain tableware with traditional hand painting.',cover:'plate-hd.jpg',kind:'photo',href:'aura/index.html',
+   body:fig('soap.webp','Surprise soap with foam in hands','Final result','photo')},
+  {t:'Aura',meta:'Object · semester 3',short:'Porcelain tableware with traditional hand painting.',cover:'plate-hd.webp',kind:'photo',href:'aura/index.html',
    desc:'A reinterpretation of porcelain tableware that combines practicality, simplicity and traditional hand painting, inspired by Eastern European ornament.',
-   body:fig('plate.jpg','Hand-painted Aura plate','Plate','hand painting')}],
+   body:fig('plate.webp','Hand-painted Aura plate','Plate','hand painting')}],
  d3:[
-  {t:'Outdoor pavilion',meta:'Visualisation · AI scene',short:'From a simple 3D scene to a photoreal park view.',cover:'pavilion.jpg',kind:'photo',
+  {t:'Outdoor pavilion',meta:'Visualisation · AI scene',short:'From a simple 3D scene to a photoreal park view.',cover:'pavilion.webp',kind:'photo',
    desc:'A simple 3D scene turned into a photoreal view of how the pavilion would look in a real park. Drag to compare the raw render with the final image.',
-   body:`<div class="ba" id="ba"><img src="assets/pavilion-render.jpg" alt="Raw 3D render of the pavilion"><img class="after" id="baAfter" src="assets/pavilion.jpg" alt="Pavilion placed in a real park"><div class="h" id="baH"><div class="k">↔</div></div><input type="range" min="0" max="100" value="50" id="baR" aria-label="Compare render and final image"></div><div class="cap lab" style="margin-bottom:40px"><span>Render → scene</span><span class="mute">drag</span></div>`},
-  {t:'Birdhouse for urban facades',meta:'Render · lighting',short:'Exterior shell, wooden core and mounting.',cover:'bird-wall.jpg',kind:'photo',
+   body:`<div class="ba" id="ba"><img loading="lazy" decoding="async" src="assets/pavilion-render.webp" alt="Raw 3D render of the pavilion"><img loading="lazy" decoding="async" class="after" id="baAfter" src="assets/pavilion.webp" alt="Pavilion placed in a real park"><div class="h" id="baH"><div class="k">↔</div></div><input type="range" min="0" max="100" value="50" id="baR" aria-label="Compare render and final image"></div><div class="cap lab" style="margin-bottom:40px"><span>Render → scene</span><span class="mute">drag</span></div>`},
+  {t:'Birdhouse for urban facades',meta:'Render · lighting',short:'Exterior shell, wooden core and mounting.',cover:'bird-wall.webp',kind:'photo',
    desc:'A wall-mounted nesting box: exterior shell, wooden core and mounting, shown from the facade to the exploded view.',
-   body:`<div class="pgrid"><img src="assets/bird-wall.jpg" alt="Birdhouse on a sunlit wall"><img src="assets/bird-exploded.jpg" alt="Exploded view of the birdhouse"><img src="assets/bird-section.jpg" alt="Section of the birdhouse"><img src="assets/bird-render.jpg" alt="Studio render of the birdhouse"></div>`},
+   body:`<div class="pgrid"><img loading="lazy" decoding="async" src="assets/bird-wall.webp" alt="Birdhouse on a sunlit wall"><img loading="lazy" decoding="async" src="assets/bird-exploded.webp" alt="Exploded view of the birdhouse"><img loading="lazy" decoding="async" src="assets/bird-section.webp" alt="Section of the birdhouse"><img loading="lazy" decoding="async" src="assets/bird-render.webp" alt="Studio render of the birdhouse"></div>`},
   {t:'Product concepts for advertising',meta:'Concept · render',short:'[ add a one-line description ]',cover:null,desc:'[ Add description and images ]',body:''}]};
 const DIRS=[['web','Web design'],['product','Product design'],['d3','3D design']];
 const pad=n=>String(n+1).padStart(2,'0');
@@ -547,14 +557,14 @@ Object.entries(PROJ).forEach(([k,list])=>{
 });
 
 // ---- 3D: a gallery of every artwork — minimal names, one grid, a lightbox
-const GAL=[['g-chair.jpg','Lounge chair'],['g-interior.jpg','Kitchen interior'],['g-mixit.jpg','Mixit','mixit/index.html'],['g-gramophone.jpg','Gramophone'],
- ['pavilion.jpg','Pavilion'],['g-bottle2.jpg','Bottle'],['g-kitchen.jpg','Kitchen'],['g-aeris.jpg','AERIS','aeris/index.html'],
- ['g-plane.jpg','Toy plane'],['g-gasstation.jpg','Gas station'],['g-lunchbox.jpg','Lunch box'],['g-props.jpg','Game props'],['pavilion-render.jpg','Pavilion — raw render'],['g-bottle.jpg','Bottle — studio']];
+const GAL=[['g-chair.webp','Lounge chair'],['g-interior.webp','Kitchen interior'],['g-mixit.webp','Mixit','mixit/index.html'],['g-gramophone.webp','Gramophone'],
+ ['pavilion.webp','Pavilion'],['g-bottle2.webp','Bottle'],['g-kitchen.webp','Kitchen'],['g-aeris.webp','AERIS','aeris/index.html'],
+ ['g-plane.webp','Toy plane'],['g-gasstation.webp','Gas station'],['g-lunchbox.webp','Lunch box'],['g-props.webp','Game props'],['pavilion-render.webp','Pavilion — raw render'],['g-bottle.webp','Bottle — studio']];
 PROJ.d3=GAL.map(([f,t])=>({t}));
 $('.cnt[data-cnt="d3"]').textContent=`${GAL.length} works`;
 $('.pgrid2[data-for="d3"]').outerHTML=`<div class="gal" id="gal">${GAL.map(([f,t,h],i)=>`<figure class="gi"><button class="gb" data-gi="${i}" aria-label="Open ${t}"><img src="assets/${f}" alt="${t}" loading="lazy"></button><figcaption class="lab"><span>${t}</span><span class="mute">${h?'Case ↗':pad(i)}</span></figcaption></figure>`).join('')}</div>`;
 const lb=document.createElement('div'); lb.className='lbox'; lb.setAttribute('aria-hidden','true'); lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true');
-lb.innerHTML=`<div class="lb-top lab"><span id="lbN"></span><button class="lb-x" data-lb="x">Close ✕</button></div><button class="lb-p" data-lb="-1" aria-label="Previous">←</button><figure class="lb-f"><img id="lbI" alt=""><figcaption class="lab"><span id="lbT"></span><a id="lbC" hidden>Open case ↗</a></figcaption></figure><button class="lb-n" data-lb="1" aria-label="Next">→</button>`;
+lb.innerHTML=`<div class="lb-top lab"><span id="lbN"></span><button class="lb-x" data-lb="x">Close ✕</button></div><button class="lb-p" data-lb="-1" aria-label="Previous">←</button><figure class="lb-f"><img loading="lazy" decoding="async" id="lbI" alt=""><figcaption class="lab"><span id="lbT"></span><a id="lbC" hidden>Open case ↗</a></figcaption></figure><button class="lb-n" data-lb="1" aria-label="Next">→</button>`;
 document.body.appendChild(lb); let gi=0;
 const lbShow=i=>{ gi=(i+GAL.length)%GAL.length; const [f,t,h]=GAL[gi]; $('#lbI').src='assets/'+f; $('#lbI').alt=t; $('#lbT').textContent=t; $('#lbN').textContent=`${pad(gi)} / ${pad(GAL.length-1)}`; const c=$('#lbC'); c.hidden=!h; if(h) c.href=h; };
 const lbOpen=i=>{ lbShow(i); lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); html.classList.add('lock'); lenis&&lenis.stop(); };
@@ -633,7 +643,8 @@ if(fine&&!reduce){
    lbl.textContent=c?'Open':''; dot.style.width=dot.style.height=(!c&&a)?'40px':''; });
  addEventListener('pointerleave',()=>{dot.style.opacity=0;});
  const cols=['#FFB500','#D6001C','#198CD9'];
- (function loop(){
+ let raf=0; const kick=()=>{ if(!raf) raf=requestAnimationFrame(loop); }; addEventListener('pointermove',kick,{passive:true});
+  const loop=()=>{ raf=0;
    dx+=(mx-dx)*.25; dy+=(my-dy)*.25; dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
    pts.push([mx,my]); if(pts.length>18) pts.shift();
    ctx.clearRect(0,0,innerWidth,innerHeight);
@@ -641,7 +652,7 @@ if(fine&&!reduce){
      for(let i=1;i<pts.length;i++){ const [x0,y0]=pts[i-1],[x1,y1]=pts[i]; let nx=y0-y1, ny=x1-x0; const l=Math.hypot(nx,ny)||1; nx/=l; ny/=l;
        if(i===1) ctx.moveTo(x0+nx*o,y0+ny*o); ctx.lineTo(x1+nx*o,y1+ny*o); }
      ctx.strokeStyle=col; ctx.lineWidth=4; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.globalAlpha=.85; ctx.stroke(); }); ctx.globalAlpha=1; }
-   requestAnimationFrame(loop); })();
+   if(Math.abs(mx-dx)>.2||Math.abs(my-dy)>.2||pts.some(q=>q[0]!==mx||q[1]!==my)) kick(); }; kick();
 }
 
 if(window.gsap&&window.ScrollTrigger){ gsap.registerPlugin(ScrollTrigger);
@@ -652,3 +663,5 @@ addEventListener('load',()=>{build();window.ScrollTrigger&&ScrollTrigger.refresh
 show(location.hash.slice(1)||'home');
 })();
 </script>
+</body>
+</html>

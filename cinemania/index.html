@@ -1,9 +1,10 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
 <title>Cinemania Case Study</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&family=Manrope:wght@200..800&display=swap">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="../vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../vendor/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:"Inter";src:url(../vendor/fonts/inter-var.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}@font-face{font-family:"Manrope";src:url(../vendor/fonts/manrope-latin-wght-normal.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0000-024F,U+2000-206F,U+20AC,U+2122,U+2190-2199}@font-face{font-family:"Manrope";src:url(../vendor/fonts/manrope-cyrillic-wght-normal.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0400-045F,U+0490-0491,U+2116}</style>
 <style>
 /* Anna Stashko — same system as the portfolio: near-white paper, one typeface (Inter, display cut),
    three category colours (Web = yellow, Product = red, 3D = blue), corners 0–4px, no pills.
@@ -469,7 +470,7 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
     <div class="circle" id="heroCircle"></div>
     <div class="browser" id="heroBrowser" data-cursor="Scroll">
       <div class="chrome"><i></i><i></i><i></i><span class="url">cinemania.demo</span></div>
-      <div class="vp" id="heroVp"><img id="homeLong" src="assets/home-long.jpg" alt="Cinemania home page, scrolling from the hero banner down to the footer" width="960" height="2362"></div>
+      <div class="vp" id="heroVp"><img decoding="async" id="homeLong" src="assets/home-long.webp" alt="Cinemania home page, scrolling from the hero banner down to the footer" width="960" height="2362"></div>
     </div>
   </div>
 </section>
@@ -487,11 +488,11 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
       <div class="step"><div class="track"><div class="fill"></div></div><span class="label">3 — Payment</span></div>
     </div>
     <div class="rail" id="rail">
-      <div class="card"><div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">cinemania.demo/plans</span></div><div class="vp"><img src="assets/tariffs.jpg" alt="Plan selection: Basic, Standard and Premium cards, step 1 of 3" loading="lazy"></div></div>
+      <div class="card"><div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">cinemania.demo/plans</span></div><div class="vp"><img src="assets/tariffs.webp" alt="Plan selection: Basic, Standard and Premium cards, step 1 of 3" loading="lazy"></div></div>
         <div class="card-cap"><span class="n">01</span><p>Three plans, one highlighted. The choice travels through every next step.</p></div></div>
-      <div class="card"><div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">cinemania.demo/sign-up</span></div><div class="vp"><img src="assets/register.jpg" alt="Sign-up form over a wall of posters, step 2 of 3" loading="lazy"></div></div>
+      <div class="card"><div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">cinemania.demo/sign-up</span></div><div class="vp"><img src="assets/register.webp" alt="Sign-up form over a wall of posters, step 2 of 3" loading="lazy"></div></div>
         <div class="card-cap"><span class="n">02</span><p>Four fields or Google. The posters behind remind people what they are joining for.</p></div></div>
-      <div class="card"><div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">cinemania.demo/payment</span></div><div class="vp"><img src="assets/payment.jpg" alt="Payment method form with card fields, step 3 of 3" loading="lazy"></div></div>
+      <div class="card"><div class="browser"><div class="chrome"><i></i><i></i><i></i><span class="url">cinemania.demo/payment</span></div><div class="vp"><img src="assets/payment.webp" alt="Payment method form with card fields, step 3 of 3" loading="lazy"></div></div>
         <div class="card-cap"><span class="n">03</span><p>Pay, see a success message, and land back on the film you wanted.</p></div></div>
     </div>
   </div>
@@ -503,8 +504,8 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
     <h2 class="big">Wireframe to product</h2>
   </div>
   <div class="compare" id="cmp" data-cursor="Drag">
-    <img src="assets/wire35.jpg" alt="Original wireframe of the watch page: episode list, empty player and placeholder text bars" loading="lazy">
-    <img class="after" id="cmpAfter" src="assets/watch.jpg" alt="Finished watch page with episode list, season switcher and player" loading="lazy">
+    <img src="assets/wire35.webp" alt="Original wireframe of the watch page: episode list, empty player and placeholder text bars" loading="lazy">
+    <img class="after" id="cmpAfter" src="assets/watch.webp" alt="Finished watch page with episode list, season switcher and player" loading="lazy">
     <div class="handle" id="cmpHandle"><div class="knob">↔</div></div>
     <input type="range" id="cmpRange" min="0" max="100" value="50" aria-label="Compare concept and prototype">
   </div>
@@ -551,10 +552,10 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
     <h2 class="big">101 screens, one product</h2>
   </div>
   <div class="row" id="row1">
-    <img src="assets/film.jpg" alt="Film page"><img src="assets/series.jpg" alt="Series page"><img src="assets/halloween.jpg" alt="Halloween collection"><img src="assets/watch.jpg" alt="Watch page">
+    <img loading="lazy" decoding="async" src="assets/film.webp" alt="Film page"><img loading="lazy" decoding="async" src="assets/series.webp" alt="Series page"><img loading="lazy" decoding="async" src="assets/halloween.webp" alt="Halloween collection"><img loading="lazy" decoding="async" src="assets/watch.webp" alt="Watch page">
   </div>
   <div class="row" id="row2">
-    <img src="assets/search.jpg" alt="Search and filters"><img src="assets/tariffs.jpg" alt="Plans"><img src="assets/register.jpg" alt="Sign-up"><img src="assets/payment.jpg" alt="Payment">
+    <img loading="lazy" decoding="async" src="assets/search.webp" alt="Search and filters"><img loading="lazy" decoding="async" src="assets/tariffs.webp" alt="Plans"><img loading="lazy" decoding="async" src="assets/register.webp" alt="Sign-up"><img loading="lazy" decoding="async" src="assets/payment.webp" alt="Payment">
   </div>
 </section>
 
@@ -592,9 +593,9 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/ScrollTrigger.min.js"></script>
+<script src="../vendor/scroll.js"></script>
 <script>
 (function(){
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -632,12 +633,13 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
     });
     addEventListener('pointerleave',()=>{dot.style.opacity=0;});
     const cols=['#FFB500','#D6001C','#198CD9'];
-    (function loop(){ dx+=(mx-dx)*.25; dy+=(my-dy)*.25; dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
+    let raf=0; const kick=()=>{ if(!raf) raf=requestAnimationFrame(loop); }; addEventListener('pointermove',kick,{passive:true});
+  const loop=()=>{ raf=0; dx+=(mx-dx)*.25; dy+=(my-dy)*.25; dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
       pts.push([mx,my]); if(pts.length>10) pts.shift(); ctx.clearRect(0,0,innerWidth,innerHeight);
       if(pts.length>2){ cols.forEach((col,k)=>{ const o=(k-1)*3; ctx.beginPath();
         for(let i=1;i<pts.length;i++){ const [x0,y0]=pts[i-1],[x1,y1]=pts[i]; let nx=y0-y1, ny=x1-x0; const l=Math.hypot(nx,ny)||1; nx/=l; ny/=l; if(i===1) ctx.moveTo(x0+nx*o,y0+ny*o); ctx.lineTo(x1+nx*o,y1+ny*o); }
         ctx.strokeStyle=col; ctx.lineWidth=2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.globalAlpha=.7; ctx.stroke(); }); ctx.globalAlpha=1; }
-      requestAnimationFrame(loop); })();
+      if(Math.abs(mx-dx)>.2||Math.abs(my-dy)>.2||pts.some(q=>q[0]!==mx||q[1]!==my)) kick(); }; kick();
   }
 
   // odometer numbers: each digit rolls through 0–9 to its value

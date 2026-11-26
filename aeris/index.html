@@ -1,9 +1,9 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body>
 <title>AERIS Air Story</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..900&display=swap">
+<link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
+<link rel="preload" href="../vendor/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:"Inter";src:url(../vendor/fonts/inter-var.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}</style>
 <style>
 /* AERIS — case 04, scroll story. Portfolio system: paper, Inter only, 12-col grid, radii 0–4, product red. */
 :root{
@@ -220,7 +220,7 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
   <span class="lab crumb"><a href="../index.html#product">← Product design</a> &nbsp;/&nbsp; Case 04</span>
   <h1 class="mega" aria-label="Aeris"><span>A</span><span>e</span><span>r</span><span>i</span><span>s</span></h1>
   <div class="meta g12 lab"><span>Nesting module</span><span>Object</span><span>2026</span><span><i></i>Scroll to see more</span></div>
-  <div class="stage" id="stage"><div class="circle" id="circle"></div><div class="tri"><figure class="ph t1"><img src="assets/aeris-white.jpg" alt="AERIS on a light facade, leaf shadows across it"></figure><figure class="ph t2"><img src="assets/aeris-orange.jpg" alt="AERIS on a terracotta facade"></figure><figure class="ph t3"><img src="assets/proto-open.jpg" alt="The prototype opened: clay cocoon around the wooden nest box on two dowels"></figure></div></div>
+  <div class="stage" id="stage"><div class="circle" id="circle"></div><div class="tri"><figure class="ph t1"><img decoding="async" src="assets/aeris-white.webp" alt="AERIS on a light facade, leaf shadows across it"></figure><figure class="ph t2"><img loading="lazy" decoding="async" src="assets/aeris-orange.webp" alt="AERIS on a terracotta facade"></figure><figure class="ph t3"><img loading="lazy" decoding="async" src="assets/proto-open.webp" alt="The prototype opened: clay cocoon around the wooden nest box on two dowels"></figure></div></div>
 </section>
 
 <!-- PROBLEM -->
@@ -255,9 +255,9 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
   <div class="shead"><span class="lab red">[ Process ]</span><h2>From print to prototype.</h2></div>
   <div class="bars lab" style="--n:3"><span class="on">Wooden core</span><span class="on">Printed cocoon</span><span class="on">Finished prototype</span></div>
   <div class="proc g12">
-    <figure><div class="ph"><img src="assets/proc-wood.jpg" alt="Wooden nest box parts on a workbench" loading="lazy"></div><p>Built in the wooden workbench.</p></figure>
-    <figure><div class="ph"><img src="assets/proc-assembly.jpg" alt="3D-printed PLA shell around the wooden box, a dowel in hand" loading="lazy"></div><p>Printed in PLA as the carrier.</p></figure>
-    <figure><div class="ph"><img src="assets/proto-top.jpg" alt="Finished prototype from above: clay cocoon, wooden nest box and dowels" loading="lazy"></div><p>Clay surface over the printed shell.</p></figure>
+    <figure><div class="ph"><img src="assets/proc-wood.webp" alt="Wooden nest box parts on a workbench" loading="lazy"></div><p>Built in the wooden workbench.</p></figure>
+    <figure><div class="ph"><img src="assets/proc-assembly.webp" alt="3D-printed PLA shell around the wooden box, a dowel in hand" loading="lazy"></div><p>Printed in PLA as the carrier.</p></figure>
+    <figure><div class="ph"><img src="assets/proto-top.webp" alt="Finished prototype from above: clay cocoon, wooden nest box and dowels" loading="lazy"></div><p>Clay surface over the printed shell.</p></figure>
   </div>
 </section>
 
@@ -266,8 +266,8 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
   <div class="shead"><span class="lab red">[ Exhibition ]</span><h2>Exhibition</h2></div>
   <div class="exh g12">
     <div class="info"><div><span class="lab red">2026</span><h3>»Was wir teilen – Designforschung zu Raum und Zusammenleben«</h3></div><p>Haus der Stadtgeschichte Offenbach. Student projects of HfG Offenbach, part of »Places of Democracy«, World Design Capital 2026.</p></div>
-    <figure class="room"><div class="ph"><img src="assets/ex-room.jpg" alt="The exhibition space with visitors and objects" loading="lazy"></div><figcaption class="lab">The exhibition space</figcaption></figure>
-    <figure><div class="ph"><img src="assets/ex-anna.jpg" alt="Anna next to AERIS in the exhibition" loading="lazy"></div><figcaption class="lab">With the object</figcaption></figure>
+    <figure class="room"><div class="ph"><img src="assets/ex-room.webp" alt="The exhibition space with visitors and objects" loading="lazy"></div><figcaption class="lab">The exhibition space</figcaption></figure>
+    <figure><div class="ph"><img src="assets/ex-anna.webp" alt="Anna next to AERIS in the exhibition" loading="lazy"></div><figcaption class="lab">With the object</figcaption></figure>
   </div>
 </section>
 
@@ -291,9 +291,9 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
 
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="../vendor/gsap.min.js"></script>
+<script src="../vendor/ScrollTrigger.min.js"></script>
+<script src="../vendor/scroll.js"></script>
 <script>
 (function(){
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -390,12 +390,13 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches && !reduce){
   const size=()=>{tc.width=innerWidth*dpr; tc.height=innerHeight*dpr; tc.style.width=innerWidth+'px'; tc.style.height=innerHeight+'px'; c2.setTransform(dpr,0,0,dpr,0,0);}; size(); addEventListener('resize',size);
   addEventListener('pointermove',e=>{mx=e.clientX; my=e.clientY; dot.style.opacity=1;}); addEventListener('pointerleave',()=>dot.style.opacity=0);
   const cols=['#FFB500','#D6001C','#198CD9'];
-  (function loop(){ dx+=(mx-dx)*.25; dy+=(my-dy)*.25; dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
+  let raf=0; const kick=()=>{ if(!raf) raf=requestAnimationFrame(loop); }; addEventListener('pointermove',kick,{passive:true});
+  const loop=()=>{ raf=0; dx+=(mx-dx)*.25; dy+=(my-dy)*.25; dot.style.transform=`translate(${dx}px,${dy}px) translate(-50%,-50%)`;
     pts.push([mx,my]); if(pts.length>10) pts.shift(); c2.clearRect(0,0,innerWidth,innerHeight);
     if(pts.length>2){ cols.forEach((col,k)=>{ const o=(k-1)*3; c2.beginPath();
       for(let i=1;i<pts.length;i++){ const [x0,y0]=pts[i-1],[x1,y1]=pts[i]; let nx=y0-y1, ny=x1-x0; const l=Math.hypot(nx,ny)||1; nx/=l; ny/=l; if(i===1) c2.moveTo(x0+nx*o,y0+ny*o); c2.lineTo(x1+nx*o,y1+ny*o); }
       c2.strokeStyle=col; c2.lineWidth=2; c2.lineCap='round'; c2.lineJoin='round'; c2.globalAlpha=.7; c2.stroke(); }); c2.globalAlpha=1; }
-    requestAnimationFrame(loop); })();
+    if(Math.abs(mx-dx)>.2||Math.abs(my-dy)>.2||pts.some(q=>q[0]!==mx||q[1]!==my)) kick(); }; kick();
 }
 
 })();
