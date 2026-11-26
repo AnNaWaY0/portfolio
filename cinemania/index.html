@@ -559,19 +559,6 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
   </div>
 </section>
 
-<!-- OUTCOME -->
-<section class="sec wrap" id="outcome">
-  <div class="sec-head">
-    <h2 class="big">Outcome</h2>
-  </div>
-  <div class="out-grid">
-    <div class="col a"><span class="label mute">Delivered</span><ul>
-      <li><h4>A complete clickable product</h4><p>Every flow works from the first visit to the last episode, with no dead ends.</p></li>
-      <li><h4>A reusable design system</h4><p>Tokens and 223 components make new screens fast and consistent.</p></li>
-      <li><h4>A self-audit before hand-off</h4><p>I tested every control myself, then fixed the issues I found.</p></li></ul></div>
-  </div>
-</section>
-
 <!-- END -->
 <!-- NEXT PROJECT (shared) -->
 <section class="npx wrap" id="next" data-href="../fluid/index.html" style="--npc:var(--web)">
@@ -733,8 +720,6 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
   // gallery rows move opposite ways
 
   
-  // outcome
-  gsap.from('.col',{y:80,opacity:0,stagger:.15,duration:1,ease:'power3.out',scrollTrigger:{trigger:'.out-grid',start:'top 80%'}});
 
   // big headings: rise from a mask
   $$('h2.big').forEach(h=>gsap.from(h,{yPercent:30,opacity:0,duration:1,ease:'expo.out',scrollTrigger:{trigger:h,start:'top 88%'}}));
