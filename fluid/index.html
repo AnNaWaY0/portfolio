@@ -51,7 +51,7 @@ main{overflow-x:clip}
 .meta .go i{width:8px;height:8px;border-radius:50%;background:var(--ink);animation:pulse 1.6s infinite}
 @keyframes pulse{50%{transform:scale(1.7);opacity:.35}}
 .intro{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-top:48px;align-items:end}
-.intro .lead{grid-column:1/span 6;margin:0;font:500 clamp(19px,1.7vw,24px)/1.32 var(--text);letter-spacing:-.015em}
+.intro .lead{grid-column:1/span 6;margin:0;max-width:52ch;font:400 clamp(17px,1.4vw,20px)/1.5 var(--text);color:var(--soft)}
 .intro .how{grid-column:8/span 5;margin:0;color:var(--soft);font-size:16px}
 @media (max-width:899px){.head h1{font-size:18.5vw}.meta,.intro{grid-template-columns:1fr}.meta span,.intro p{grid-column:1/-1!important;justify-self:start!important}}
 
@@ -319,7 +319,6 @@ body.npx-leaving main{opacity:0;transform:translateY(-40px);transition:opacity .
   <div class="meta lab"><span>UI system · 17 components</span><span>WiSe 25/26 · solo</span><span>Figma · variants · interactions</span><span class="go"><i></i>Hover and click</span></div>
   <div class="intro">
     <p class="lead">A UI system rooted in soft geometric abstraction and organic layering: large overlapping circles, maximum corner radii, bold lines and massive fills. The component board behind Cinemania.</p>
-    <p class="how">Every element on the board works — hover and click. Light versions sit on the paper, white versions on the dark circle.</p>
   </div>
 </section>
 
