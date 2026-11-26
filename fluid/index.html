@@ -260,10 +260,10 @@ main{overflow-x:clip}
 .veil.on{opacity:1}
 .it.lift{z-index:41!important}
 /* arrival: each component fades up as its row comes into view, then gives one light tap */
-.rv-on .it{opacity:0;translate:0 14px;scale:.97;transition:opacity .6s ease var(--d,0s),translate .7s cubic-bezier(.2,.8,.2,1) var(--d,0s),scale .7s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
+.rv-on .it{opacity:0;translate:0 6px;transition:opacity .45s ease var(--d,0s),translate .5s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
 .rv-on .it.in{opacity:1;translate:0 0;scale:1}
-.rv-on .it.in.tap{animation:itTap .8s cubic-bezier(.3,.7,.3,1) calc(var(--d,0s) + .75s) 1}
-@keyframes itTap{0%,100%{scale:1}45%{scale:1.04}}
+.rv-on .it.in.tap{animation:itTap .6s cubic-bezier(.3,.7,.3,1) calc(var(--d,0s) + .5s) 1}
+@keyframes itTap{0%,100%{scale:1}45%{scale:1.015}}
 @media (prefers-reduced-motion:reduce){.rv-on .it{opacity:1!important;translate:none!important;scale:none!important;animation:none!important}}
 
 /* outline “Start now” and “Try now” */
@@ -413,7 +413,7 @@ fit(); addEventListener('resize',fit);
 // components arrive row by row (left to right), then each gives one light tap — a hint that they can be clicked
 if(!reduce && 'IntersectionObserver' in window){
   document.documentElement.classList.add('rv-on');
-  const items=$$('.it'); items.forEach(it=>{ const x=parseFloat(getComputedStyle(it).getPropertyValue('--x'))||0; it.style.setProperty('--d',(x/1280*.45).toFixed(2)+'s'); });
+  const items=$$('.it'); items.forEach(it=>{ const x=parseFloat(getComputedStyle(it).getPropertyValue('--x'))||0; it.style.setProperty('--d',(x/1280*.2).toFixed(2)+'s'); });
   const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in','tap'); io.unobserve(e.target);
     setTimeout(()=>e.target.classList.remove('tap'),2600); } }),{threshold:.25,rootMargin:'0px 0px -6% 0px'});
   items.forEach(it=>io.observe(it));
