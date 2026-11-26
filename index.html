@@ -339,6 +339,20 @@ html.lock{overflow:hidden}
 .pc-foot .go{display:inline-flex;gap:10px;white-space:nowrap;flex:none;padding-bottom:4px;border-bottom:1px solid currentColor}
 .pc-foot .go i{font-style:normal;transition:transform .3s}.pcard:hover .pc-foot .go i{transform:translateX(6px)}
 @media (max-width:900px){.pgrid2{grid-template-columns:1fr!important;row-gap:56px}.pcard{grid-column:1/-1!important}.pc-head{min-height:0}.pcard .tile{height:72vw}}
+
+/* ===== direction pages, round 18: no tile backgrounds — each photo at its own proportions, melted into the paper,
+   wide and narrow cards alternate and the narrow one sits lower, so the grid reads as a loose, organic layout ===== */
+.pgrid2{align-items:start;row-gap:clamp(64px,7vw,112px)}
+.pcard.s5{margin-top:clamp(56px,8vw,140px)}
+.pcard .tile{height:auto!important;aspect-ratio:auto;background:none!important;box-shadow:none}
+.pcard .tile.fit{align-self:flex-start;max-width:100%}
+.pcard .tile.fit img{position:static;display:block;width:auto;max-width:100%;height:auto;max-height:min(76vh,700px);object-fit:contain;padding:0!important;mix-blend-mode:multiply}
+.pcard .tile.shot{aspect-ratio:16/10;align-self:stretch}
+.pcard .tile.empty{align-self:stretch;aspect-ratio:4/3;border:1px dashed #CFCCC5;border-radius:var(--r)}
+.pcard .tile.empty .ph3{background:none}
+.pcard .pc-foot{margin-top:14px}
+.pcard.lone-l{grid-column:1/span 6}.pcard.lone-r{grid-column:7/span 6}
+@media (max-width:900px){.pcard.s5{margin-top:0}.pcard .tile.fit img{max-height:none}}
 </style>
 </head>
 <body>
@@ -555,7 +569,7 @@ Object.entries(PROJ).forEach(([k,list])=>{
  const span=(i,n)=>{ const r=Math.floor(i/2), first=i%2===0; if(first&&i===n-1) return r%2?'lone-r':'lone-l'; return (r%2===0)===first?'s7':'s5'; };
  $(`.pgrid2[data-for="${k}"]`).innerHTML=list.map((p,i)=>`<a class="pcard ${span(i,list.length)}" id="p-${k}-${i}" ${p.href?`href="${p.href}" data-case`:`href="#${k}" data-open="${k}:${i}"`}>
   <div class="pc-head"><h3>${p.t}</h3><p>${p.short}</p></div>
-  <div class="tile ${p.long?'shot':'fit'}">${p.cover?(p.long?`<span class="bar"><i></i><i></i><i></i></span>`:'')+`<img src="assets/${p.cover}" alt="${p.t}" loading="lazy">`:`<div class="ph3 lab mute">[ images coming ]</div>`}</div>
+  <div class="tile ${p.long?'shot':'fit'}${p.cover?'':' empty'}">${p.cover?(p.long?`<span class="bar"><i></i><i></i><i></i></span>`:'')+`<img src="assets/${p.cover}" alt="${p.t}" loading="lazy">`:`<div class="ph3 lab mute">[ images coming ]</div>`}</div>
   <div class="pc-foot lab"><span>${pad(i)} — <span class="mute">${p.meta}</span></span><span class="go">${p.href?'Open case':'Open'} <i>→</i></span></div></a>`).join('');
 });
 
